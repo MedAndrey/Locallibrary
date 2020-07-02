@@ -1,0 +1,28 @@
+{% extends "base_generic.html" %}
+{% block content %}
+
+	<h1>Возобновить: {{bookinst.book.title}}</h1>
+	<p>Занят пользователем: {{bookinst.borrower}}</p>
+	<p {% if bookinst.is_overdue %} class="text-danger"{% endif %}> Срок сдачи: {{bookinst.due_back}}</p>
+
+	<form action="" method="post">
+		{% csrf_token %}
+		<table>
+		{{ form }}
+		</table>
+		<input type="submit" value="Изменить" />
+	</form>
+
+{% endblock %}
+
+<tr>
+	<th><label form="id_renewal_date">Дата обновления:</label></th>
+	<td>
+		<ul class="errorlist">
+			<li>Неверная дата - обновлено в прошлом</li>
+		</ul>
+		<input id="id_renewal_date" type="text" name="renewal_date" value="2020-04-17" required />
+		<br />
+		<span class="helptext">ведите дату от сегодняшней до 4 недель (по умолчанию 3 недели).</span>
+	</td>
+</tr>
